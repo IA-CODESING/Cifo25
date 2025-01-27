@@ -30,6 +30,7 @@ html{
     margin: 0 auto;
     align-content: center;
     margin-bottom: 2rem;
+    text-align: center;
 }
 .jsinfo{
     color: white;
