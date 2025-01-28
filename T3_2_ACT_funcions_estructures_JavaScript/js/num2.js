@@ -1,6 +1,7 @@
 import { reload } from "./library.js";
 reload;
 
+let valoresArray = [];
 const frase = document.querySelector(".jscontent");
 frase.innerHTML = `
 <input class="dataInput" type="text" placeholder="Escribe tu frase" style="width: 100%;">
@@ -9,8 +10,14 @@ frase.innerHTML = `
 
 const capturaDatos = document.querySelector(".dataInput");
 
-let valoresArray = [];
-const openwin = document.querySelector("button");
+const openwin = document.querySelector("#openy");
+
+capturaDatos.addEventListener("keyup", () => {
+    let prueba = capturaDatos.value;
+    let palabras = prueba.split(' ').filter(Boolean);
+    valoresArray = palabras;
+    console.log(valoresArray);
+});
 
 openwin.addEventListener("click",() => {
     let otherWin = window.open(
@@ -19,18 +26,14 @@ openwin.addEventListener("click",() => {
         "width=600,height=800"
     );
     
-    capturaDatos.addEventListener("keyup", () => {
-        let prueba = capturaDatos.value;
-        let palabras = prueba.split(' ').filter(Boolean);
-        valoresArray = palabras;
-        console.log(valoresArray);
-    });
     otherWin.document.write( `<p>La primer palabra que has escrito es: ${valoresArray[0]} </p>`);
     otherWin.document.write( `<p>La ultima palabra que has escrito es: ${valoresArray.at(-1)} </p>`);
     otherWin.document.write( `<p>El numero de  palabra que has escrito es: ${valoresArray.length} </p>`);
-    otherWin.document.write( `<p>El numero de  palabra que has escrito es: ${valoresArray.sort()} </p>`);
-    
-
+    let alfabet = valoresArray.sort();
+    alfabet.forEach(alfa => {
+        let uniendo = alfa.split("**")
+        otherWin.document.write(`<p>El orden alfabetico es: ${uniendo}</p>`)
+    })
 } )
 
 
